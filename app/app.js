@@ -1,7 +1,16 @@
-import NavView from './view';
+import NavView from './navview';
+import PageView from './pageview';
 import MyRouter from './router';
 
-new NavView();
-new MyRouter();
-Backbone.history.start({ pushState: true, root: '/babel-backbone-example' });
-$('#message').html('ページがロードされました。').fadeOut(6000);
+$(() => {
+  let options = {
+    model: new Backbone.Model()
+  };
+
+  new NavView();
+  new PageView(options);
+  new MyRouter(options);
+
+  Backbone.history.start({ pushState: true, root: '/babel-backbone-example' });
+  $('#message').html('ページがロードされました。').fadeOut(6000);
+});

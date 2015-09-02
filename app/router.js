@@ -1,23 +1,27 @@
 export default class MyRouter extends Backbone.Router {
 
-  constructor() {
-    super({
+  constructor(options) {
+    options = _.extend(options, 
+    {
       routes: {
         '(:name)(/)': 'dispatch'
       }
-    });
-    //this.route('(:name)(/)', 'dispatch');
+    }
+    );
+
+    super(options);
+    this.model = options.model;
   }
 
   dispatch(name) {
-
     if (name === null) {
       name = 'index';
     }
 
-    let $content = $('#page');
-    $content.children('h1').html(name + ' のタイトル');
-    $content.children('div').html(name + ' の内容');
+    this.model.set({
+      title: name + ' のタイトル',
+      body: name + ' の内容'
+    });
   }
 
 }
