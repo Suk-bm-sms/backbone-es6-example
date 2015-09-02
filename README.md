@@ -3,9 +3,28 @@ Backbone.js と EcmaScript 6 (ES6) のコードの例
 
  Backbone.js と EcmaScript 6 (ES6) のコードの例です。EcmaScript 6 から EcmaScript 5 への変換に Babel と WebPack を使います。
 
-インストール
------------
+システムの要件
+------------
 
+次の要件を前提とします。
+
+ * npm
+ * History API が利用できるブラウザー
+
+npm は nvm から node.js もしくは io.js をインストールすれば利用できるようになります。History API は Backbone Router を使うために必要です。
+
+Google Chrome と Apache HTTP Server で動作の確認をしており、Backbone Router のために .htaccess を追加しています。
+
+Backbone.history.start を呼び出す際にルート URI を指定する必要があります。app/app.js では次のように指定しています。ソースコード一式を含むフォルダーの名前を変更する場合、修正する必要があります。
+
+```javascript
+Backbone.history.start({ pushState: true, root: '/backbone-es6-example' });
+```
+
+インストール
+----------
+
+ターミナルから次のコマンドを実行します。
 
 ```bash
 git clone https://github.com/masakielastic/backbone-es6-example.git
@@ -13,6 +32,8 @@ cd backbone-es6-example
 mkdir node_modules
 npm install
 ```
+
+npm を実行したディレクトリに node_modules のフォルダーが存在しない場合、別のディレクトリにある node_modules にインストールされてしまう可能性があります。
 
 ビルド
 -----
@@ -22,7 +43,6 @@ EcmaScript 6 のソースコードが修正されたら、EcmaScript 5 のコー
 ```bash
 webpack --watch
 ```
-
 
 package.json に追加した次のコマンドを実行します。
 
