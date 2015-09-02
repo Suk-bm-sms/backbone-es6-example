@@ -11,6 +11,6 @@ $(() => {
   new PageView(options);
   new MyRouter(options);
 
-  Backbone.history.start({ pushState: true, root: '/babel-backbone-example' });
+  Backbone.history.start({ pushState: true, root: '/backbone-es6-example' });
   $('#message').html('ページがロードされました。').fadeOut(6000);
 });

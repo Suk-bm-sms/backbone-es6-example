@@ -8,8 +8,8 @@ EcmaScript 6 (ES6) と Backbone.js のコードの例です。EcmaScript 6 か�
 
 
 ```bash
-git clone https://github.com/masakielastic/babel-backbone-example.git
-cd babel-backbone-example
+git clone https://github.com/masakielastic/backbone-es6-example.git
+cd backbone-es6-example
 mkdir node_modules
 npm install
 ```
