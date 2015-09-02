@@ -6,14 +6,29 @@ Backbone.js と EcmaScript 6 (ES6) のコードの例
 システムの要件
 ------------
 
-次の要件を前提とします。
+このコードを試すには、次の要件を満たすことが必要です。
 
- * npm
+ * npm がターミナルから利用できること
  * History API が利用できるブラウザー
 
-npm は nvm から node.js もしくは io.js をインストールすれば利用できるようになります。History API は Backbone Router を使うために必要です。
+著者は Google Chrome と Apache HTTP Server で動作の確認をしています。
 
-Google Chrome と Apache HTTP Server で動作の確認をしており、Backbone Router のために .htaccess を追加しています。
+npm は nvm から node.js もしくは io.js をインストールすれば利用できるようになります。
+
+History API が必要なのは Backbone Router を使うためです。Router のおかげでハッシュタグ (`#about`) を含む `/index.html#about` を `/about` としてブラウザーの URL バーに表示できるようになります。
+
+### History API のための設定
+
+Backbone Router のために .htaccess を追加しています。
+
+```bash
+<ifModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule (.*) index.html [L,QSA]
+</ifModule>
+```
 
 Backbone.history.start を呼び出す際にルート URI を指定する必要があります。app/app.js では次のように指定しています。ソースコード一式を含むフォルダーの名前を変更する場合、修正する必要があります。
 
