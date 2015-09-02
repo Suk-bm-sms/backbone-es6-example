@@ -1,0 +1,30 @@
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../main.css"/>
+    <title>Backbone.Route と ES 6 の例</title>
+  </head>
+  <body>
+
+    <ul id='nav'>
+      <li><a href="/">ホーム</a></li>
+      <li><a href="/about">自己紹介</a></li>
+      <li><a href="/error">存在しないページ</a></li>
+    </ul>
+
+    <div id="page"></div>
+
+    <script id="pageTemplate" type="text/template">
+      <h1><%= title %></h1>
+      <div><%= body %></div>
+    </script>
+
+    <div id="message" style="color: blue"></div>
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/underscore/underscore-min.js"></script>
+    <script src="../node_modules/backbone/backbone-min.js"></script>
+    <script src="bundle.js"></script>
+
+  </body>
+</html>
