@@ -1,5 +1,7 @@
-Babel と Backbone.js の例
-========================
+EcmaScript 6 (ES6) と Backbone.js の例
+======================================
+
+EcmaScript 6 (ES6) と Backbone.js のコードの例です。EcmaScript 6 から EcmaScript 5 への変換に Babel と WebPack を使います。
 
 インストール
 -----------
