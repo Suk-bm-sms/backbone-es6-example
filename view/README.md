@@ -1,9 +1,27 @@
 Backbone.View と EcmaScript 6 の例
 =================================
 
-Backbone.View を使ってテンプレートをもとにページのタイトルと本文を表示させるプログラムです。テンプレートエンジンには undescore.js の `_.template` を使います。
+Backbone.View を使ってテンプレートをもとにページのタイトルと本文を表示させるプログラムです。
 
-Backbone.View を継承するクラスをつくる場合、EcmaScript 6 では `class` 構文を使うことができます。
+ビルド
+-----
+
+package.json のある上のディレクトリでツールをインストールした上で、Webpack のコマンドを実行します。
+
+```bash
+cd view
+webpack --watch
+```
+
+ビルドをカスタマイズするには webpack.config.js を修正します。
+
+
+解説
+----
+
+ビューはモデルの保有しているデータをもとに HTML を生成します。テンプレートエンジンには undescore.js の `_.template` を使います。モデルはデータベースからのデータだけでなく、ビューの状態をあらわすオボジェクトの管理に使うこともできます。
+
+ビューをつくるには Backbone.View を継承するクラスをつくります。EcmaScript 6 では `class` 構文を使うことができます。
 初期化の処理は `constructor` および `initialize` の両方で可能です。
 
 ```javascript
