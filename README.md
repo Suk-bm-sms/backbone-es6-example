@@ -31,9 +31,25 @@ package.json に追加した次のコマンドを実行します。
 npm run watch
 ```
 
+Webpack と Babel の連携のために [babel-loader](https://github.com/babel/babel-loader) が導入されており、webpack.config.js のコードの例は次のようになります。
+
+```javascript
+{
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel'
+      }
+    ]
+  }
+}
+```
+
 ### 圧縮
 
-変換と同時に UglifyJs によるファイルサイズの圧縮も行われます。UglifyJs を使うための webkpack.config.js の設定は次のとおりです。
+変換されたコードのファイルは UglifyJs によって圧縮されます。UglifyJs を使うための webkpack.config.js の設定は次のとおりです。変換されたコードを確認したい場合、コメントアウトして無効にするとよいでしょう。
 
 ```javascript
 {
