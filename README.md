@@ -21,6 +21,17 @@ Backbone.history.start を呼び出す際にルート URI を指定する必要�
 Backbone.history.start({ pushState: true, root: '/backbone-es6-example' });
 ```
 
+History API が利用できない、もしくは .htaccess が利用できない場合、`pushState` の値を `false` にすることに加えて、
+index.html の文章の中にあるリンクを修正する必要があります。
+
+```html
+<ul id='nav'>
+  <li><a href="#">ホーム</a></li>
+  <li><a href="#about">自己紹介</a></li>
+  <li><a href="#error">存在しないページ</a></li>
+</ul>
+```
+
 インストール
 ----------
 
