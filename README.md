@@ -17,36 +17,6 @@ npm は nvm から node.js もしくは io.js をインストールすれば利�
 
 History API が必要なのは Backbone Router を使うためです。Router のおかげでハッシュタグ (`#about`) を含む `/index.html#about` を `/about` としてブラウザーの URL バーに表示できるようになります。
 
-### History API のための設定
-
-Backbone Router のために .htaccess を追加しています。
-
-```bash
-<ifModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule (.*) index.html [L,QSA]
-</ifModule>
-```
-
-Backbone.history.start を呼び出す際にルート URI を指定する必要があります。app/app.js では次のように指定しています。ソースコード一式を含むフォルダーの名前を変更する場合、修正する必要があります。
-
-```javascript
-Backbone.history.start({ pushState: true, root: '/backbone-es6-example' });
-```
-
-History API が利用できない、もしくは .htaccess が利用できない場合、`pushState` の値を `false` にすることに加えて、
-index.html の文章の中にあるリンクを修正する必要があります。
-
-```html
-<ul id='nav'>
-  <li><a href="#">ホーム</a></li>
-  <li><a href="#about">自己紹介</a></li>
-  <li><a href="#error">存在しないページ</a></li>
-</ul>
-```
-
 インストール
 ----------
 
@@ -64,17 +34,11 @@ npm を実行したディレクトリに node_modules のフォルダーが存�
 ビルド
 -----
 
-EcmaScript 6 のソースコードが修正されたら、EcmaScript 5 のコードに自動的に変換されるように WebPack に監視させます。
+それぞれの例ごとのディレクトリに移動します。EcmaScript 6 のソースコードが修正されたら、EcmaScript 5 のコードに自動的に変換されるように WebPack に監視させます。
 
 ```bash
+cd some_example
 webpack --watch
-```
-
-package.json に追加した次のコマンドを実行します。
-
-
-```
-npm run watch
 ```
 
 Webpack と Babel の連携のために [babel-loader](https://github.com/babel/babel-loader) が導入されており、webpack.config.js のコードの例は次のようになります。
