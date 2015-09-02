@@ -1,34 +1,5 @@
-var PageModel = Backbone.Model.extend({
-  localStorage: new Backbone.LocalStorage('PageModel'),
-  defaults: {
-    id: 1
-  },
-  init: function() {
-    this.save({
-      id: 1,
-      title: 'ホームのタイトル',
-      body: 'ホームの内容'
-    });
-  }
-});
-
-var PageView = Backbone.View.extend({
-  el: '#pageView',
-  template: _.template($('#pageTemplate').html()),
-  initialize: function(options) {
-    this.siteTitle = options.siteTitle;
-    this.$title = $('title');
-    this.dispatcher = options.dispatcher;
-    this.listenTo(this.model, 'change', this.render);
-    this.listenTo(this.dispatcher, 'normal-mode', this.show);
-    this.listenTo(this.dispatcher, 'edit-mode', this.hide);
-  },
-  render: function() {
-    var page = this.model;
-    this.$title.html(page.get('title')  + ' - ' + this.siteTitle);
-    this.$el.html(this.template(page.toJSON()));
-  }
-});
+import PageModel from './pagemodel';
+import PageView from './pageview';
 
 var EditView = Backbone.View.extend({
   el: '#editView',
@@ -128,8 +99,9 @@ var ButtonView = Backbone.View.extend({
   }
 });
 
-var dispatcher = _.extend({}, Backbone.Events);
-var app = {};
+
+let dispatcher = _.extend({}, Backbone.Events);
+let app = {};
 app.siteTitle = 'Backbone の練習';
 app.page = new PageModel();
 
