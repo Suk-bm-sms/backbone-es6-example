@@ -1,0 +1,21 @@
+{
+  "name": "es6-backbone.js",
+  "private": true,
+  "license": "MIT",
+  "description": "ES6 + Backbone.js",
+  "version": "0.1.0",
+  "scripts": {
+    "watch": "webpack --watch"
+  },
+  "dependencies": {
+    "backbone": "*",
+    "jquery": "*",
+    "underscore": "*"
+  },
+  "devDependencies": {
+    "babel-core": "*",
+    "babel-loader": "*",
+    "node-libs-browser": "*",
+    "webpack": "*"
+  }
+}

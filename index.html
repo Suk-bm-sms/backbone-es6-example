@@ -1,0 +1,38 @@
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+<style>
+body {
+  margin: 50px;
+}
+#nav li {
+  display: inline;
+  margin: 0 5px;
+}
+</style>
+
+<ul id='nav'>
+  <li><a href="/">ホーム</a></li>
+  <li><a href="/about">自己紹介</a></li>
+  <li><a href="/error">存在しないページ</a></li>
+</ul>
+
+<div id="page">
+  <h1></h1>
+  <div></div>
+</div>
+
+<div id="message" style="color: blue"></div>
+
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/underscore/underscore-min.js"></script>
+<script src="node_modules/backbone/backbone-min.js"></script>
+<script src="dist/bundle.js"></script>
+
+</body>
+
+</html>
