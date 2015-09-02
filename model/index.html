@@ -1,0 +1,50 @@
+<title></title>
+
+<style>
+body {
+  margin: 50px;
+}
+
+#editView {
+  width: 35%;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+#editView input, textarea {
+  width: 80%;
+}
+</style>
+
+<div id="pageView"></div>
+
+<div id="editView"></div>
+
+<div id="buttonView"></div>
+
+<script id="pageTemplate" type="text/template">
+<h1><%= title %></h1>
+<div><%= body %></div>
+</script>
+
+<script id="editTemplate" type="text/template">
+<h1>ページの編集</h1>
+<div>タイトル</div>
+<input type="text" value="<%= title %>" />
+<div>本文</div>
+<textarea rows="5"><%= body %></textarea>
+</script>
+
+<script id="buttonTemplate" type="text/template">
+<ul>
+  <% _.each(list, function(item) { %>
+  <li style="display: <%= item.display %>;"><button><%= item.label %></button></li>
+  <% }); %>
+</ul>
+</script>
+
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.1/backbone-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.16/backbone.localStorage-min.js"></script>
+<script src="app/app.js"></script>
