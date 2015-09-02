@@ -1,5 +1,5 @@
-EcmaScript 6 (ES6) と Backbone.js の例
-======================================
+EcmaScript 6 (ES6) と Backbone.js のコードの例
+============================================
 
 EcmaScript 6 (ES6) と Backbone.js のコードの例です。EcmaScript 6 から EcmaScript 5 への変換に Babel と WebPack を使います。
 
@@ -40,3 +40,8 @@ npm run watch
   ]
 }
 ```
+
+参考資料
+-------
+
+Backbone.js のコードを書くにあたり、[Backbone TodoMVC + ECMAScript 6](https://github.com/tastejs/todomvc-backbone-es6) のコードや [Backbone and ES6 Classes Revisited](http://benmccormick.org/2015/07/06/backbone-and-es6-classes-revisited/) が参考になりました。
