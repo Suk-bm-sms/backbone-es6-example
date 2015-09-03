@@ -2,20 +2,22 @@ var { Model, View } = Backbone;
 
 export default class PageView extends View {
 
+  get el() {
+    return '#page';
+  }
+
+  get template() {
+    return _.template($('#pageTemplate').html());
+  }
+
   constructor(options) {
-    let ext = {
-      el: '#page',
-      model: new Model({
-        title: 'タイトル',
-        body: '本文'
-      })
-    };
-
-    options = options ? _.extend(options, ext) : ext;
-
     super(options);
 
-    this.template = _.template($('#pageTemplate').html());
+    this.model = new Model({
+        title: 'タイトル',
+        body: '本文'
+    });
+
     this.render();
   }
 
