@@ -1,0 +1,64 @@
+export default class ButtonView extends Backbone.View
+{
+  constructor(options) {
+    super({
+      el: '#buttonView',
+      events: {
+        'click li:nth-child(1)': 'handleEdit',
+        'click li:nth-child(2)': 'handleCancel',
+        'click li:nth-child(3)': 'handleSave',
+        'click li:nth-child(4)': 'handleReset',  
+      }
+    });
+
+    this.template = _.template($('#buttonTemplate').html()),
+
+    this.model = new Backbone.Model;
+    this.dispatcher = options.dispatcher;
+    this.listenTo(this.model, 'change', this.render);
+    this.normalMode();
+  }
+
+  render() {
+    let list = this.model.toJSON()['display'];
+    this.$el.html(this.template({list: list}));
+  }
+
+  normalMode() {
+    this.model.set({ display: [
+      {label: '編集', display: 'inline'},
+      {label: 'キャンセル', display: 'none'},
+      {label: '保存', display: 'none'},
+      {label: '初期化', display: 'inline'}
+    ]});
+  }
+
+  editMode() {
+    this.model.set({ display: [
+      {label: '編集', display: 'none'},
+      {label: 'キャンセル', display: 'inline'},
+      {label: '保存', display: 'inline'},
+      {label: '初期化', display: 'none'}
+    ]});
+  }
+
+  handleEdit() {
+    this.editMode();
+    this.dispatcher.trigger('edit-mode');
+  }
+
+  handleCancel() {
+    this.normalMode();
+    this.dispatcher.trigger('normal-mode');
+  }
+
+  handleSave() {
+    this.normalMode();
+    this.dispatcher.trigger('normal-mode');
+    this.dispatcher.trigger('order-save');
+  }
+
+  handleReset() {
+    this.dispatcher.trigger('order-reset');
+  }
+}
