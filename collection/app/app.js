@@ -1,3 +1,5 @@
+var PubSub = _.extend({}, Backbone.Events);
+
 var Page = Backbone.Model.extend({
   defaults: {
     id: null,
@@ -189,6 +191,23 @@ var ViewMixin = {
 _.extend(PageView.prototype, ViewMixin);
 _.extend(EditView.prototype, ViewMixin);
 
+var NavView = Backbone.View.extend({
+  el: '#navView',
+  events: {
+    'click a': 'handleClick'
+  },
+  handleClick: function(evt) {
+    var href = $(evt.currentTarget).attr('href');
+
+    // http://stackoverflow.com/a/19709846/531320
+    if (0 > href.indexOf('http://') || 0 > href.indexOf('https://')) {
+      Backbone.history.navigate(href, true);
+
+      return false;
+    }
+  }
+});
+
 var app = {};
 
 app.siteTitle = 'Backbone の練習';
@@ -204,6 +223,8 @@ app.editView = new EditView({
 app.buttonView = new ButtonView({
   collection: app.collection
 });
+
+app.navView = new NavView({});
 
 var Router = Backbone.Router.extend({
   routes: {
@@ -237,4 +258,4 @@ var Router = Backbone.Router.extend({
 app.router = new Router({
   collection: app.collection
 });
-Backbone.history.start();
+Backbone.history.start({ pushState: true, root: '/backbone-es6-example/collection' });
