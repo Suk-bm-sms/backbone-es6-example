@@ -3,19 +3,6 @@ Backbone.View と EcmaScript 6 の例
 
 Backbone.View を継承するビューオブジェクトを使って、テンプレートからページのタイトルと本文を表示させるプログラムです。
 
-ビルド
------
-
-package.json のある上のディレクトリでツールをインストールした上で、Webpack のコマンドを実行します。
-
-```bash
-cd view
-webpack --watch
-```
-
-ビルドをカスタマイズするには webpack.config.js を修正します。
-
-
 解説
 ----
 
