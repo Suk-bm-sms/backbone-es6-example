@@ -1,56 +1,16 @@
-var PubSub = _.extend({}, Backbone.Events);
-
-var Page = Backbone.Model.extend({
-  defaults: {
-    id: null,
-    name: null,
-    title: null,
-    body: null
-  }
-});
-
-var PageCollection = Backbone.Collection.extend({
-  model: Page,
-  localStorage: new Backbone.LocalStorage('PageCollection'),
-  initData: [
-    {id: 1, name: 'index', title: 'ホームの見出し', body: 'ホームの内容'},
-    {id: 2, name: 'about', title: '自己紹介の見出し', body: '自己紹介の内容'}
-  ],
-  populateInitData: function() {
-    var that = this;
-    if (that.length === 0) {
-      that.initData.forEach(function(elm) {
-        that.create(elm);
-      });
-    }
-  },
-  findByName: function(name) {
-    var page = this.findWhere({name: name});
-
-    if (typeof page === 'undefined') {
-
-      return new Backbone.Model({
-        id: null,
-        name: null,
-        title: 'エラー',
-        body: 'ページは存在しません'
-      });
-    } 
-
-    return page;
-  }
-});
-
+import PageCollection from './pagecollection';
 
 var PageView = Backbone.View.extend({
   el: '#pageView',
   template: _.template($('#pageTemplate').html()),
   initialize: function(options) {
+    this.dispatcher = options.dispatcher;
     this.siteTitle = options.siteTitle;
     this.$title = $('title');
+
     this.listenTo(this.collection, 'change', this.render);
-    this.listenTo(PubSub, 'normal-mode', this.show);
-    this.listenTo(PubSub, 'edit-mode', this.hide);
+    this.listenTo(this.dispatcher, 'normal-mode', this.show);
+    this.listenTo(this.dispatcher, 'edit-mode', this.hide);
   },
   render: function(model) {
     var title = model.get('title');
@@ -64,11 +24,13 @@ var EditView = Backbone.View.extend({
   el: '#editView',
   template: _.template($('#editTemplate').html()),
   initialize: function(options) {
+    this.dispatcher = options.dispatcher;
+
     this.listenTo(this.collection, 'change', this.render);
-    this.listenTo(PubSub, 'edit-mode', this.show);
-    this.listenTo(PubSub, 'normal-mode', this.hide);
-    this.listenTo(PubSub, 'order-save', this.save);
-    this.listenTo(PubSub, 'order-reset', this.reset);
+    this.listenTo(this.dispatcher, 'edit-mode', this.show);
+    this.listenTo(this.dispatcher, 'normal-mode', this.hide);
+    this.listenTo(this.dispatcher, 'order-save', this.save);
+    this.listenTo(this.dispatcher, 'order-reset', this.reset);
     this.hide();
   },
   render: function(model) {
@@ -92,16 +54,16 @@ var EditView = Backbone.View.extend({
     var collection = this.collection;
     var model;
 
-    while (model = this.collection.first()) {
+    while (model = collection.first()) {
       model.destroy();
     }
 
-    this.collection.populateInitData();
+    collection.populateInitData();
 
     var name = this.getName();
 
-    model = this.collection.findByName(name);
-    this.collection.trigger('change', model);
+    model = collection.findByName(name);
+    collection.trigger('change', model);
   }
 });
 
@@ -118,6 +80,7 @@ var ButtonView = Backbone.View.extend({
   initialize: function(options) {
     this.model = new Backbone.Model;
     this.collection = options.collection;
+    this.dispatcher = options.dispatcher;
     this.listenTo(this.model, 'change', this.render);
     this.listenTo(this.collection, 'change', this.handleCollectionChange);
   },
@@ -158,19 +121,19 @@ var ButtonView = Backbone.View.extend({
   },
   handleEdit: function() {
     this.editMode();
-    PubSub.trigger('edit-mode');
+    this.dispatcher.trigger('edit-mode');
   },
   handleCancel: function() {
     this.normalMode();
-    PubSub.trigger('normal-mode');
+    this.dispatcher.trigger('normal-mode');
   },
   handleSave: function() {
     this.normalMode();
-    PubSub.trigger('normal-mode');
-    PubSub.trigger('order-save');
+    this.dispatcher.trigger('normal-mode');
+    this.dispatcher.trigger('order-save');
   },
   handleReset: function() {
-    PubSub.trigger('order-reset');
+    this.dispatcher.trigger('order-reset');
   }
 });
 
@@ -190,22 +153,6 @@ var ViewMixin = {
 
 _.extend(PageView.prototype, ViewMixin);
 _.extend(EditView.prototype, ViewMixin);
-
-var app = {};
-
-app.siteTitle = 'Backbone の練習';
-app.collection = new PageCollection;
-app.pageView = new PageView({
-  collection: app.collection,
-  siteTitle: app.siteTitle
-});
-app.editView = new EditView({
-  collection: app.collection
-});
-
-app.buttonView = new ButtonView({
-  collection: app.collection
-});
 
 var Router = Backbone.Router.extend({
   routes: {
@@ -234,6 +181,26 @@ var Router = Backbone.Router.extend({
       }
     });
   }
+});
+
+var app = {};
+var dispatcher = _.extend({}, Backbone.Events);
+app.siteTitle = 'Backbone の練習';
+app.collection = new PageCollection;
+
+app.pageView = new PageView({
+  collection: app.collection,
+  siteTitle: app.siteTitle,
+  dispatcher: dispatcher
+});
+app.editView = new EditView({
+  collection: app.collection,
+  dispatcher: dispatcher
+});
+
+app.buttonView = new ButtonView({
+  collection: app.collection,
+  dispatcher: dispatcher
 });
 
 app.router = new Router({
