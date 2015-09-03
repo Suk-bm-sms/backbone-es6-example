@@ -10,9 +10,7 @@ export default class PageView extends View {
     return _.template($('#pageTemplate').html());
   }
 
-  constructor(options) {
-    super(options);
-
+  initialize(options) {
     this.model = new Model({
         title: 'タイトル',
         body: '本文'
