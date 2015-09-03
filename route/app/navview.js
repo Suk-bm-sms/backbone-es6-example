@@ -1,12 +1,17 @@
 export default class NavView extends Backbone.View {
 
-  constructor() {
-    super({
-      el: '#nav',
-      events: {
-        'click a': 'handleClick'
-      }
-    });
+  get el() {
+    return '#nav';
+  }
+
+  get events() {
+    return {
+      'click a': 'handleClick'
+    };
+  }
+
+  constructor(options) {
+    super(options);
   }
 
   handleClick(evt) {

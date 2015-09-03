@@ -1,14 +1,12 @@
 export default class MyRouter extends Backbone.Router {
 
-  constructor(options) {
-    options = _.extend(options, 
-    {
-      routes: {
-        '(:name)(/)': 'dispatch'
-      }
-    }
-    );
+  get routes() {
+    return {
+      '(:name)(/)': 'dispatch'
+    };
+  }
 
+  constructor(options) {
     super(options);
     this.model = options.model;
   }
