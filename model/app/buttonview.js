@@ -1,20 +1,28 @@
 export default class ButtonView extends Backbone.View
 {
-  constructor(options) {
-    super({
-      el: '#buttonView',
-      events: {
+  get el() {
+    return '#buttonView';
+  }
+
+  get template() {
+    return _.template($('#buttonTemplate').html());
+  }
+
+  get events() {
+    return {
         'click li:nth-child(1)': 'handleEdit',
         'click li:nth-child(2)': 'handleCancel',
         'click li:nth-child(3)': 'handleSave',
-        'click li:nth-child(4)': 'handleReset',  
-      }
-    });
+        'click li:nth-child(4)': 'handleReset'
+      };
+  }
 
-    this.template = _.template($('#buttonTemplate').html()),
+  constructor(options) {
+    super(options);
 
-    this.model = new Backbone.Model;
+    this.model = new Backbone.Model();
     this.dispatcher = options.dispatcher;
+
     this.listenTo(this.model, 'change', this.render);
     this.normalMode();
   }

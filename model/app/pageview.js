@@ -1,16 +1,23 @@
 export default class PageView extends Backbone.View {
 
+  get el() {
+    return '#pageView';
+  }
+
+  get template() {
+    return _.template($('#pageTemplate').html());
+  }
+
+  get $title() {
+    return $('title');
+  }
+
   constructor(options) {
-    super({
-      el: '#pageView'
-    });
+    super(options);
 
-    this.model = options.model;
     this.siteTitle = options.siteTitle;
+    this.model = options.model;
     this.dispatcher = options.dispatcher;
-
-    this.template = _.template($('#pageTemplate').html());
-    this.$title = $('title');
 
     this.listenTo(this.model, 'change', this.render);
     this.listenTo(this.dispatcher, 'normal-mode', this.show);

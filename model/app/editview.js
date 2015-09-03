@@ -1,20 +1,25 @@
 export default class EditView extends Backbone.View {
-  constructor(options) {
-    super({
-      el: '#editView'
-    });
 
-    this.template = _.template($('#editTemplate').html());
+  get el() {
+    return '#editView';
+  }
+
+  get template() {
+    return _.template($('#editTemplate').html());
+  }
+
+  constructor(options) {
+    super(options);
 
     this.model = options.model;
-
     this.dispatcher = options.dispatcher;
+
+    this.hide();
     this.listenTo(this.model, 'change', this.render);
     this.listenTo(this.dispatcher, 'edit-mode', this.show);
     this.listenTo(this.dispatcher, 'normal-mode', this.hide);
     this.listenTo(this.dispatcher, 'order-save', this.save);
     this.listenTo(this.dispatcher, 'order-reset', this.reset);
-    this.hide();
   }
 
   render() {
