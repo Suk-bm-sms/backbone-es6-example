@@ -1,24 +1,5 @@
 import PageCollection from './pagecollection';
-
-var PageView = Backbone.View.extend({
-  el: '#pageView',
-  template: _.template($('#pageTemplate').html()),
-  initialize: function(options) {
-    this.dispatcher = options.dispatcher;
-    this.siteTitle = options.siteTitle;
-    this.$title = $('title');
-
-    this.listenTo(this.collection, 'change', this.render);
-    this.listenTo(this.dispatcher, 'normal-mode', this.show);
-    this.listenTo(this.dispatcher, 'edit-mode', this.hide);
-  },
-  render: function(model) {
-    var title = model.get('title');
-
-    this.$title.html(title + ' - ' + this.siteTitle);
-    this.$el.html(this.template(model.toJSON()));
-  }
-});
+import PageView from './pageview';
 
 var EditView = Backbone.View.extend({
   el: '#editView',
@@ -64,6 +45,17 @@ var EditView = Backbone.View.extend({
 
     model = collection.findByName(name);
     collection.trigger('change', model);
+  },
+  show: function() {
+    this.$el.show();
+  },
+  hide: function() {
+    this.$el.hide();
+  },
+  getName: function() {
+    var name = Backbone.history.fragment;
+
+    return name === '' ? 'index' : name;
   }
 });
 
@@ -136,23 +128,6 @@ var ButtonView = Backbone.View.extend({
     this.dispatcher.trigger('order-reset');
   }
 });
-
-var ViewMixin = {
-  show: function() {
-    this.$el.show();
-  },
-  hide: function() {
-    this.$el.hide();
-  },
-  getName: function() {
-    var name = Backbone.history.fragment;
-
-    return name === '' ? 'index' : name;
-  }
-};
-
-_.extend(PageView.prototype, ViewMixin);
-_.extend(EditView.prototype, ViewMixin);
 
 var Router = Backbone.Router.extend({
   routes: {
