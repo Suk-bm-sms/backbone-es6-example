@@ -17,9 +17,7 @@ export default class ButtonView extends Backbone.View
       };
   }
 
-  constructor(options) {
-    super(options);
-
+  initialize(options) {
     this.model = new Backbone.Model();
     this.dispatcher = options.dispatcher;
 

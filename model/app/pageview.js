@@ -12,9 +12,7 @@ export default class PageView extends Backbone.View {
     return $('title');
   }
 
-  constructor(options) {
-    super(options);
-
+  initialize(options) {
     this.siteTitle = options.siteTitle;
     this.model = options.model;
     this.dispatcher = options.dispatcher;

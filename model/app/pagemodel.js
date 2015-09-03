@@ -1,7 +1,4 @@
 export default class PageModel extends Backbone.Model {
-  constructor(options) {
-    super(options);
-  }
 
   get defaults() {
     return {

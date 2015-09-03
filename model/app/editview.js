@@ -8,9 +8,7 @@ export default class EditView extends Backbone.View {
     return _.template($('#editTemplate').html());
   }
 
-  constructor(options) {
-    super(options);
-
+  initialize(options) {
     this.model = options.model;
     this.dispatcher = options.dispatcher;
 
