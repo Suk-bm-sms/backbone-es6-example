@@ -1,13 +1,16 @@
 export default class PageModel extends Backbone.Model {
   constructor(options) {
     super(options);
-    this.localStorage = new Backbone.LocalStorage('PageModel');
   }
 
-  defaults() {
+  get defaults() {
     return {
       id: 1
     }
+  }
+
+  get localStorage() {
+    return new Backbone.LocalStorage('PageModel');
   }
 
   init() {
