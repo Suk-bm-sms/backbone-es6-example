@@ -10,10 +10,6 @@ export default class NavView extends Backbone.View {
     };
   }
 
-  constructor(options) {
-    super(options);
-  }
-
   handleClick(evt) {
     let href = $(evt.currentTarget).attr('href');
 

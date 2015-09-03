@@ -6,8 +6,7 @@ export default class MyRouter extends Backbone.Router {
     };
   }
 
-  constructor(options) {
-    super(options);
+  initialize(options) {
     this.model = options.model;
   }
 
