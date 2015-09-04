@@ -22,7 +22,7 @@ export default class PageView extends Backbone.View
   }
 
   render(model) {
-    var title = model.get('title');
+    let title = model.get('title');
 
     this.$title.html(title + ' - ' + this.siteTitle);
     this.$el.html(this.template(model.toJSON()));
@@ -37,7 +37,7 @@ export default class PageView extends Backbone.View
   }
 
   getName() {
-    var name = Backbone.history.fragment;
+    let name = Backbone.history.fragment;
 
     return name === '' ? 'index' : name;
   }

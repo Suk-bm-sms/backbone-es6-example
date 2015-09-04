@@ -12,7 +12,7 @@ export default class PageCollection extends Backbone.Collection
   }
 
   populateInitData() {
-    var that = this;
+    let that = this;
     if (that.length === 0) {
       that.initData.forEach(function(elm) {
         that.create(elm);
@@ -21,7 +21,7 @@ export default class PageCollection extends Backbone.Collection
   }
 
   findByName(name) {
-    var page = this.findWhere({name: name});
+    let page = this.findWhere({name: name});
 
     if (typeof page === 'undefined') {
 
