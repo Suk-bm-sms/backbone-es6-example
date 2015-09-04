@@ -15,7 +15,7 @@ export default class Router extends Backbone.Router.extend
       name = 'index';
     }
 
-    var that = this;
+    let that = this;
 
     that.collection.fetch({
       silent: true,
