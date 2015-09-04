@@ -11,7 +11,7 @@
  
 ページが読み込まれた際に、`fetch` を実行して localStorage から値を取り出します。localStorage にデータが保存されていない場合のために、`silent` に `true` を指定して、`change` イベントを自動的に発行しないようにします。
 
-ビューは3つ用意しました。それぞれの責務は、ページ情報の表示 (PageView)、編集画面 (EditView)、ボタンによる画面の切り替え (ButtonView) です。
+ビューは3つ用意しました。それぞれの責務は、ページ情報の表示 (`PageView`)、編集画面 (`EditView`)、ボタンによる画面の切り替え (`ButtonView`) です。
 
 
-それぞれのビューは Dispatcher を通じて連携します。ButtonView が複数のイベントを発行するのに対して、PageView、EditView は受動的にイベントに対応します。
+それぞれのビューは Dispatcher を通じて連携します。`ButtonView` が複数のイベントを発行するのに対して、`PageView`、`EditView` は受動的にイベントに対応します。
