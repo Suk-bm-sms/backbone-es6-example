@@ -1,13 +1,10 @@
 export default class MessageView extends Backbone.View {
 
-  constructor(options) {
-    let ext = {
-      el: '#messageView'
-    };
-    options = options ? _.extend(options, ext) : ext;
+  get el() {
+    return '#messageView';
+  }
 
-    super(options);
-
+  initialize(options) {
     this.dispatcher = options.dispatcher;
     this.listenTo(this.dispatcher, 'input-status', this.handleInputStatus);
     this.listenTo(this.dispatcher, 'message', this.handleSendMessage);

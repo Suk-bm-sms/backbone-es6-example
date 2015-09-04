@@ -1,16 +1,16 @@
 export default class ButtonView extends Backbone.View {
 
-  constructor(options) {
-    let ext = {
-      el: '#buttonView',
-      events: {
-        'click button': 'handleClick'
-      }
+  get el() {
+    return '#buttonView';
+  }
+
+  get events() {
+    return {
+      'click button': 'handleClick'
     };
-    options = options ? _.extend(options, ext) : ext;
+  }
 
-    super(options);
-
+  initialize(options) {
     this.dispatcher = options.dispatcher;
     this.listenTo(this.dispatcher, 'button-status', this.handleButtonStatus);
   }
@@ -18,8 +18,6 @@ export default class ButtonView extends Backbone.View {
   handleClick(evt) {
     evt.preventDefault();
     this.dispatcher.trigger('order');
-
-    return false;
   }
 
   handleButtonStatus(status) {
