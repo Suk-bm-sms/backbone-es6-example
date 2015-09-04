@@ -9,7 +9,8 @@ Backbone.View を継承するビューオブジェクトを使って、テンプ
 ビューはモデルの保有しているデータをもとに HTML を生成します。テンプレートエンジンには undescore.js の `_.template` を使います。モデルはデータベースからのデータだけでなく、ビューの状態をあらわすオボジェクトの管理に使うこともできます。
 
 ビューをつくるには Backbone.View を継承するクラスをつくります。EcmaScript 6 では `class` 構文を使うことができます。
-初期化の処理は `constructor` および `initialize` の両方で可能です。
+
+初期化の処理は `constructor` および `initialize` の両方で可能です。基本的な選択肢は `super` を呼び出さなくてすむ　`initialize` のほうがよいのではないかと思います。
 
 ```javascript
 class PageView extends Backbone.View {
@@ -62,9 +63,17 @@ if (!options) {
 }
 ```
 
-`template` を `super` の引数に指定しても割り当てされないので、`this.template` に直接割り当てることにしました。
+`template` を `super` の引数に指定しても割り当てされません。`this.template` に直接割り当てることにしました。
 
 
 ```javascript
 this.template = _.template($('#pageTemplate').html());
+```
+
+`template` を不変であることが想定されるので、`get` と関数の組み合わせで宣言することもできます。this を通じてプロパティに割り当てる方法よりも、不変であることが伝わりやすいでしょう。
+
+```javascript
+get template() {
+  return _.template($('#pageTemplate').html());
+}
 ```
