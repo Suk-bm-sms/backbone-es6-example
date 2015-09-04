@@ -1,4 +1,4 @@
-export default class Router extends Backbone.Router.extend
+export default class Router extends Backbone.Router
 {
   get routes() {
     return {
@@ -15,19 +15,7 @@ export default class Router extends Backbone.Router.extend
       name = 'index';
     }
 
-    let that = this;
-
-    that.collection.fetch({
-      silent: true,
-      success: function() {
-
-        if (that.collection.length === 0) {
-          that.collection.populateInitData();
-        } else {
-          let model = that.collection.findByName(name);
-          that.collection.trigger('change', model);
-        }
-      }
-    });
+    let model = this.collection.findByName(name);
+    this.collection.trigger('change', model);
   }
 }
