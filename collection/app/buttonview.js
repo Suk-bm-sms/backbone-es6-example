@@ -28,7 +28,7 @@ export default class ButtonView extends Backbone.View
 
   render(options) {
     let list = this.model.toJSON()['display'];
-    this.$el.html(this.footerTemplate({list: list}));
+    this.$el.html(this.template({list: list}));
   }
 
   normalMode() {
