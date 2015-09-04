@@ -20,7 +20,7 @@ export default class ButtonView extends Backbone.View {
     this.dispatcher.trigger('order');
   }
 
-  handleButtonStatus(status) {
-    this.$el.children('button').prop('disabled', status ? false: true);
+  handleButtonStatus(data) {
+    this.$el.children('button').prop('disabled', data.status ? false: true);
   }
 }
