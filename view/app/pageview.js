@@ -1,4 +1,4 @@
-var { Model, View } = Backbone;
+let { Model, View } = Backbone;
 
 export default class PageView extends View {
 
