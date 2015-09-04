@@ -1,4 +1,5 @@
-export default class EditView extends Backbone.View {
+export default class EditView extends Backbone.View
+{
 
   get el() {
     return '#editView';
@@ -10,7 +11,6 @@ export default class EditView extends Backbone.View {
 
   initialize(options) {
     this.dispatcher = options.dispatcher;
-    this.collection = options.collection;
 
     this.listenTo(this.collection, 'change', this.render);
     this.listenTo(this.dispatcher, 'edit-mode', this.show);
@@ -47,6 +47,11 @@ export default class EditView extends Backbone.View {
     }
 
     collection.populateInitData();
+
+    let name = this.getName();
+    model = collection.findByName(name);
+
+    collection.trigger('change', model);
   }
 
   show() {
