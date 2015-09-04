@@ -4,6 +4,10 @@ export default class PageView extends Backbone.View
     return '#pageView';
   }
 
+  get $title() {
+    return $('title');
+  }
+
   get template() {
     return _.template($('#pageTemplate').html());
   }
@@ -11,7 +15,6 @@ export default class PageView extends Backbone.View
   initialize(options) {
     this.dispatcher = options.dispatcher;
     this.siteTitle = options.siteTitle;
-    this.$title = $('title');
 
     this.listenTo(this.collection, 'change', this.render);
     this.listenTo(this.dispatcher, 'normal-mode', this.show);
