@@ -27,9 +27,9 @@ export default class PageCollection extends Backbone.Collection
 
       return new Backbone.Model({
         id: null,
-        name: null,
+        name: name,
         title: 'エラー',
-        body: 'ページは存在しません'
+        body: 'ページは存在しません。'
       });
     } 
 
