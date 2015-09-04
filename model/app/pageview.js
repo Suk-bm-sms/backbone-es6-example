@@ -26,7 +26,6 @@ export default class PageView extends Backbone.View {
     let page = this.model;
     this.$title.html(page.get('title')  + ' - ' + this.siteTitle);
     this.$el.html(this.template(page.toJSON()));
-    return $this;
   }
 
   show() {
