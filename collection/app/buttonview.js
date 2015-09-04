@@ -17,16 +17,16 @@ export default class ButtonView extends Backbone.View
     };
   }
 
-  initialize() {
+  initialize(options) {
+    this.dispatcher = options.dispatcher;
+    this.collection = options.collecion;
     this.model = new Backbone.Model;
+
     this.listenTo(this.model, 'change', this.render);
     this.normalMode();
   }
 
   render(options) {
-    this.dispatcher = options.dispatcher;
-    this.collection = options.collecion;
-
     let list = this.model.toJSON()['display'];
     this.$el.html(this.footerTemplate({list: list}));
   }
