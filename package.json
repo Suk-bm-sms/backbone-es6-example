@@ -1,8 +1,8 @@
 {
-  "name": "es6-backbone.js",
+  "name": "backbone-es6",
   "private": true,
   "license": "MIT",
-  "description": "ES6 + Backbone.js",
+  "description": "Backbone.js + ES6",
   "version": "0.1.0",
   "dependencies": {
     "jquery": "2.*",
