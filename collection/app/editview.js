@@ -1,4 +1,4 @@
-export default EditView extends Backbone.View {
+export default class EditView extends Backbone.View {
 
   get el() {
     return '#editView';
@@ -34,19 +34,19 @@ export default EditView extends Backbone.View {
     let body = this.$el.find('textarea').val();
     let name = this.getName();
     let page = this.collection.findByName(name);
-    page.save({title: title, body:body});
 
+    page.save({title: title, body:body});
   }
 
   reset() {
     let collection = this.collection;
     let model;
 
-    while (model = this.collection.first()) {
+    while (model = collection.first()) {
       model.destroy();
     }
 
-    this.collection.populateInitData(); 
+    collection.populateInitData();
   }
 
   show() {
