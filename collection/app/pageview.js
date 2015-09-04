@@ -13,8 +13,8 @@ export default class PageView extends Backbone.View
   }
 
   initialize(options) {
-    this.dispatcher = options.dispatcher;
     this.siteTitle = options.siteTitle;
+    this.dispatcher = options.dispatcher;
 
     this.listenTo(this.collection, 'change', this.render);
     this.listenTo(this.dispatcher, 'normal-mode', this.show);
