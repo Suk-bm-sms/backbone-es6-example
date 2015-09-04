@@ -33,8 +33,8 @@ $(() => {
   // http://stackoverflow.com/a/32375108/531320
   $(document).on('click', 'a[href]', function(evt) {
 
-    var target = evt.currentTarget;
-    var href = target.getAttribute('href');
+    let target = evt.currentTarget;
+    let href = target.getAttribute('href');
 
     if (!href.match(/^https?:\/\//)) {
       Backbone.history.navigate(href, true);
