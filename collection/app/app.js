@@ -8,6 +8,13 @@ $(() => {
   let dispatcher = _.extend({}, Backbone.Events);
   let siteTitle = 'Backbone の練習';
   let collection = new PageCollection;
+  collection.fetch({
+    success: function() {
+      if (collection.length === 0) {
+        collection.populateInitData();
+      }
+    }
+  });
 
   new PageView({
     siteTitle: siteTitle,
@@ -24,6 +31,7 @@ $(() => {
     dispatcher: dispatcher
   });
 
+
   new Router({
     collection: collection
   });
@@ -31,7 +39,7 @@ $(() => {
   Backbone.history.start({ pushState: true, root: '/backbone-es6-example/collection' });
 
   // http://stackoverflow.com/a/32375108/531320
-  $(document).on('click', 'a[href]', function(evt) {
+  $(document.body).on('click', 'a[href]', function(evt) {
 
     let target = evt.currentTarget;
     let href = target.getAttribute('href');
