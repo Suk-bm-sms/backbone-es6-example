@@ -35,10 +35,4 @@ export default class PageView extends Backbone.View
   hide() {
     this.$el.hide();
   }
-
-  getName() {
-    let name = Backbone.history.fragment;
-
-    return name === '' ? 'index' : name;
-  }
 }
