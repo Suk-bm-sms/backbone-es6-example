@@ -21,7 +21,6 @@ export default EditView extends Backbone.View {
   }
 
   render(model) {
-
     if (typeof model === 'undefined') {
       let name = this.getName();
       model = this.collection.findByName(name);
