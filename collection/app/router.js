@@ -3,7 +3,7 @@ export default class Router extends Backbone.Router.extend
   get routes() {
     return {
       '(:name)(/)': 'dispatch'
-    }
+    };
   }
 
   initialize(options) {
@@ -19,7 +19,15 @@ export default class Router extends Backbone.Router.extend
 
     that.collection.fetch({
       silent: true,
-      success: function() {}
+      success: function() {
+
+        if (that.collection.length === 0) {
+          that.collection.populateInitData();
+        } else {
+          let model = that.collection.findByName(name);
+          that.collection.trigger('change', model);
+        }
+      }
     });
   }
 }
