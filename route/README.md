@@ -33,3 +33,19 @@ index.html の文章の中にあるリンクを修正する必要があります
   <li><a href="#error">存在しないページ</a></li>
 </ul>
 ```
+
+すべてのリンクに対してルーターを関連づけるのであれば、次のように書くことができます。
+
+```js
+ // http://stackoverflow.com/a/32375108/531320
+$(document.body).on('click', 'a[href]', function(evt) {
+
+  var target = evt.currentTarget;
+  var href = target.getAttribute('href');
+
+  if (!href.match(/^https?:\/\//)) {
+    Backbone.history.navigate(href, true);
+    evt.preventDefault();
+  }
+});
+```
