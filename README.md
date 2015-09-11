@@ -69,6 +69,17 @@ Webpack と Babel の連携のために [babel-loader](https://github.com/babel/
 }
 ```
 
+CDN
+---
+
+ちょっとしたアイディアを試す場合、セットアップの不要な CDN が便利です。
+
+```html
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.1/backbone-min.js"></script>
+```
+
 参考資料
 -------
 
