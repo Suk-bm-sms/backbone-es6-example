@@ -1,18 +1,4 @@
-var PageModel = Backbone.Model.extend({
-  sync: function(method, model, options) {
-    model.url = function() {
-      var name = model.get('name');
-
-      if (name === 'index') {
-        return 'route2/json/' + name + '.json';
-      }
-
-      return 'json/' + name + '.json';
-    };
-
-    return Backbone.sync(method, model, options);
-  }
-});
+import PageModel from './pagemodel';
 
 var PageView = Backbone.View.extend({
   el: '#page',
