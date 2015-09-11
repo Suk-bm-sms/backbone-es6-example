@@ -1,6 +1,14 @@
 var PageModel = Backbone.Model.extend({
   sync: function(method, model, options) {
-    model.url = function() { return 'json/' + model.get('name') + '.json'; };
+    model.url = function() {
+      var name = model.get('name');
+
+      if (name === 'index') {
+        return 'route2/json/' + name + '.json';
+      }
+
+      return 'json/' + name + '.json';
+    };
 
     return Backbone.sync(method, model, options);
   }
@@ -41,11 +49,7 @@ var MyRouter = Backbone.Router.extend({
 
     this.model.set({name: name}, { silent: true });
     this.model.fetch({
-      success: function(model, response) {
-        //model.set(response);
-      },
       error: function(model) {
-
         model.set({
           name: name,
           title: 'エラー',
@@ -64,7 +68,7 @@ var options = {
 new PageView(options);
 new MyRouter(options);
 
-Backbone.history.start({ pushState: true, root: '/backbone-example/' });
+Backbone.history.start({ pushState: true, root: 'backbone-es6-example/route2' });
 $('#message').html('ページがロードされました。').fadeOut(6000);
 
 // http://stackoverflow.com/a/32375108/531320
