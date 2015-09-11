@@ -37,7 +37,7 @@ index.html の文章の中にあるリンクを修正する必要があります
 すべてのリンクに対してルーターを関連づけるのであれば、次のように書くことができます。
 
 ```js
- // http://stackoverflow.com/a/32375108/531320
+// http://stackoverflow.com/a/32375108/531320
 $(document.body).on('click', 'a[href]', function(evt) {
 
   var target = evt.currentTarget;
