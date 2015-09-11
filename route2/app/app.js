@@ -1,21 +1,5 @@
 import PageModel from './pagemodel';
-
-var PageView = Backbone.View.extend({
-  el: '#page',
-
-  template: _.template($('#pageTemplate').html()),
-
-  initialize: function(options) {
-    this.model = options.model;
-
-    this.listenTo(this.model, 'change', this.render);
-  },
-  render: function() {
-    this.$el.html(this.template(this.model.toJSON()));
-
-    return this;
-  }
-});
+import PageView from './pageview';
 
 var MyRouter = Backbone.Router.extend({
 
@@ -55,7 +39,6 @@ new PageView(options);
 new MyRouter(options);
 
 Backbone.history.start({ pushState: true, root: 'backbone-es6-example/route2' });
-$('#message').html('ページがロードされました。').fadeOut(6000);
 
 // http://stackoverflow.com/a/32375108/531320
 $(document.body).on('click', 'a[href]', function(evt) {
@@ -68,3 +51,5 @@ $(document.body).on('click', 'a[href]', function(evt) {
     evt.preventDefault();
   }
 });
+
+$('#message').html('ページがロードされました。').fadeOut(6000);
