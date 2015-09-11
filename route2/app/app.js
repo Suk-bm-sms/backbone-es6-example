@@ -1,35 +1,6 @@
 import PageModel from './pagemodel';
 import PageView from './pageview';
-
-var MyRouter = Backbone.Router.extend({
-
-  routes: {
-      '(:name)(/)': 'dispatch'
-  },
-
-  initialize: function(options) {
-    this.model = options.model;
-  },
-
-  dispatch: function(name) {
-
-    if (name === null) {
-      name = 'index';
-    }
-
-    this.model.set({name: name}, { silent: true });
-    this.model.fetch({
-      error: function(model) {
-        model.set({
-          name: name,
-          title: 'エラー',
-          body: 'ページが存在しません。'
-        });
-      }
-    });
-
-  }
-});
+import MyRouter from './myrouter';
 
 var options = {
     model: new PageModel()
